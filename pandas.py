@@ -318,6 +318,7 @@ def input_in_tabela_planning(df):
     db = 'fluid'
     engine = create_engine(f'mysql+mysqlconnector://{user_planning}:{pwd_planning}@{server}/{db}', pool_recycle=3600)
     df.to_sql('nome_da_tabela', engine, if_exists='append', index = False)
+    # df.to_sql('nome_da_tabela', engine, if_exists='replace', index = False)
     print('Input realizado com sucesso no BD')
 
 
