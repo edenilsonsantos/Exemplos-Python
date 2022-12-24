@@ -2,7 +2,7 @@
 import cv2
 
 #######################################################
-# Lendo e Imprimindo uma imagen na tela
+# LER, IMPRIMIR IMAGEM NA TELA, E CAPTURAR AS DIMENSÕES
 # Cada pixel da imagem contém um % de 3 cores, vermelho, verde e azul (RGB), cada cor pode ter o valor de 0 a 255.
 # pixel = [200, 12, 53],   print(img.shape)
 
@@ -15,14 +15,14 @@ cv2.waitKey(0)
 
 
 #######################################################
-# Converter imagem para escala de cinza
+# CONVERTER IMAGEM PARA ESCALA CINZA
 filename_color = r'c:\temp\imagem_teste.png'
 img = cv2.imread(filename_color, cv2.IMREAD_GRAYSCALE)
 cv2.imwrite(r'c:\temp\imagem_cinza.png',img)
 
 
 #######################################################
-# Recortar imagem 
+# RECORTAR IMAGEM 
 filename_gray = r'c:\temp\imagem_cinza.png'
 img = cv2.imread(filename_gray)
 altura, largura, qtd_canais_de_cores = img.shape
@@ -34,7 +34,14 @@ img_recort = img[0:altura - 100, 0:largura - 100, 0:borda]
 cv2.imwrite(r'c:\temp\imagem_recortada.png', img_recort)
 
 #######################################################
-# novo
-filename_color = r'c:\temp\imagem_teste.png'
-img = cv2.imread(filename_color, cv2.IMREAD_GRAYSCALE)
-cv2.imwrite(r'c:\temp\imagem_cinza.png',img)
+# ALTERANDO VALOR DE PIXEL DA IMAGEM
+# alterar uma posicao de pixel para preto
+# img[0][0] = [0, 0, 0]
+# alterar uma posicao de pixel para branco
+# img[0][0] = [255, 255, 255]
+
+img_path = r'c:\temp\tela_mua1.png'
+img = cv2.imread(img_path)
+img[0:100, 0:8] = (255, 255, 255)
+cv2.imshow('minha imagem', img)
+cv2.waitKey(0)
