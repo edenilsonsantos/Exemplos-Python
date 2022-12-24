@@ -45,3 +45,75 @@ img = cv2.imread(img_path)
 img[0:100, 0:8] = (255, 255, 255)
 cv2.imshow('minha imagem', img)
 cv2.waitKey(0)
+
+#######################################################
+# MANIPULAR AS CORES DE PIXEL ITERANDO A IMAGEM TODA
+img_path = r'c:\temp\tela_mua1.png'
+im = Image.open(img_path)
+img = cv2.imread(img_path)
+img1 = cv2.imread(img_path)
+img2 = cv2.imread(img_path)
+img3 = cv2.imread(img_path)
+img4 = cv2.imread(img_path)
+img5 = cv2.imread(img_path)
+branco = (255, 255, 255)
+
+#Exemplos:
+# trocando todos os pixes pela cor branco
+for i in range(0, img1.shape[0]):
+    for j in range(0, img1.shape[1]):
+        img1[i, j] = branco
+cv2.imshow('minha imagem', img1)
+cv2.waitKey(0)
+
+# add 1 pixel branco saltando a posicao de 10 em 10 para altura e largura (linha, coluna)        
+for i in range(0, img2.shape[0], 10):
+    for j in range(0, img2.shape[1], 10):
+        img2[i, j] = branco
+cv2.imshow('minha imagem', img2)
+cv2.waitKey(0)
+  
+# add 1 pixel branco saltando a posicao de 10 em 10 apenas para altura (linha)                 
+for i in range(0, img3.shape[0], 10):
+    for j in range(0, img3.shape[1]):
+        img3[i, j] = branco
+cv2.imshow('minha imagem', img3)
+cv2.waitKey(0)
+
+# pintar intervalos de pixels, exemplo de i ate i+5, de j até j+5
+for i in range(0, img4.shape[0], 10):
+    for j in range(0, img4.shape[1], 10):
+        img4[i:i+5, j:j+5] = branco
+cv2.imshow('minha imagem', img4)
+cv2.waitKey(0)
+
+# Obter os 3 valores rgb do pixel, pelo link abaixo.
+# https://yangcha.github.io/iview/iview.html
+# no loop usando matriz tridimensional da img, a terceira posicao é o rgb
+# lembrando que temos entao: img[altura, largura, canal_rgb]
+# Indice de leitura do RGB
+R = 2
+G = 1
+B = 0
+# abaixo codigo da cor do pixel que desejo substituir a cor, por branco
+# R, G, B)
+(213, 225, 236)
+# outro
+(233, 241, 248)
+
+# alteração sem iterar com for
+img5[0:100, 0:8] = (255, 255, 255)
+img5[0:100, 60:100] = (255, 255, 255)
+img5[0:15, 0:100] = (255, 255, 255)
+
+# alteração iterando com for
+for i in range(0, img5.shape[0]):
+    for j in range(0, img5.shape[1]):
+        # print(img5[i, j, B])
+        # Se eu encontrar a cor que desejo, substituir a cor do pixel por branco.
+        if (img5[i, j, R] == 213) and (img5[i, j, G] == 225) and (img5[i, j, B] == 236):
+            img5[i, j] = branco
+        if (img5[i, j, R] == 233) and (img5[i, j, G] == 241) and (img5[i, j, B] == 248):
+            img5[i, j] = branco
+cv2.imshow('minha imagem', img5)
+cv2.waitKey(0)
