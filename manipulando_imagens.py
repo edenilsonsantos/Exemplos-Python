@@ -1,5 +1,11 @@
 # pip install opencv-python
+# pip install pytesseract
+# https://yangcha.github.io/iview/iview.html
+# https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.0.20221222.exe
 import cv2
+import numpy as np
+import pytesseract
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Edenilson\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
 #######################################################
 # LER, IMPRIMIR IMAGEM NA TELA, E CAPTURAR AS DIMENSÕES
@@ -117,3 +123,66 @@ for i in range(0, img5.shape[0]):
             img5[i, j] = branco
 cv2.imshow('minha imagem', img5)
 cv2.waitKey(0)
+
+
+
+################################################################
+# OCR - DEPOIS DE IMAGEM TRATADA e ZOOM
+
+import cv2
+import numpy as np
+import pytesseract
+
+# # https://yangcha.github.io/iview/iview.html
+# https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.0.20221222.exe
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Edenilson\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+
+
+# get grayscale image
+def get_grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+#dilation, remove characters
+def dilate(image):
+    kernel = np.ones((5,5),np.uint8)
+    return cv2.dilate(image, kernel, iterations = 1)
+
+# aplicar zoom 
+def zoom(img, zoom_factor=1.5):
+    return cv2.resize(img, None, fx=zoom_factor, fy=zoom_factor) 
+
+### Tratar imagem
+filename = r'c:\temp\tela_mua1.png'
+img = cv2.imread(filename)
+img2 = cv2.imread(filename)
+branco = (255, 255, 255)
+img[0:100, 0:8] = (255, 255, 255)
+img[0:100, 60:100] = (255, 255, 255)
+img[0:15, 0:100] = (255, 255, 255)
+R, G, B = 2,1,0
+
+for i in range(0, img.shape[0]):
+    for j in range(0, img.shape[1]):
+        if (img[i, j, R] == 213) and (img[i, j, G] == 225) and (img[i, j, B] == 236):
+            img[i, j] = branco
+        if (img[i, j, R] == 233) and (img[i, j, G] == 241) and (img[i, j, B] == 248):
+            img[i, j] = branco
+            
+
+img = zoom(img, 2.5)
+cv2.imshow('minha imagem', img)
+cv2.waitKey(0)
+# filename = r'c:\temp\imagem_pronta.png'
+# cv2.imwrite(filename, img)
+# time.sleep(2)
+
+
+
+# OCR - Extração de numeros de conta
+# Adding custom options
+custom_config = r'--psm 12 --oem 3 -c tessedit_char_whitelist=0-123456789'
+contas = pytesseract.image_to_string(img, config=custom_config)
+print(contas)
+list_contas = contas.split()
+print(list_contas)
