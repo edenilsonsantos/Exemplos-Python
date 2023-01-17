@@ -1,6 +1,7 @@
 # exemplos para usar com requests.
 
 import requests
+requests.packages.urllib3.disable_warnings()
 import re
 
 ############### PESQUISAR NO GOOGLE E OBTER OS LINKS DE PÁGINAS REFERENTE A BUSCA ##########
