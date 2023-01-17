@@ -1,4 +1,4 @@
-# 1 - Wiki page exemplos Python - comentados
+# 1 - Wiki Exemplos Python
 
 
   🙋‍♀️ [# PANDAS](https://github.com/edenilsonsantos/Exemplos-Python/blob/main/Pandas.ipynb)
