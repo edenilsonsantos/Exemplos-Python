@@ -17,5 +17,4 @@
 ##
   🙋‍♀️ [# READ XML](https://github.com/edenilsonsantos/Exemplos-Python/blob/main/Read_XML.ipynb)
 ##
-  🙋‍♀️ [# CRUD SQL](https://github.com/edenilsonsantos/Exemplos-Python/blob/main/SQL.ipynb)
-##
+
